@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artisan Profile | Craft-Hub</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo">
+        <span class="logo-icon">🌿</span>
+        Craft-Hub
+      </a>
+      
+      <div class="search-bar">
+        <input type="text" placeholder="Search for handmade goods...">
+        <button class="search-btn">🔍</button>
+      </div>
+
+      <div class="nav-links">
+        <a href="/pages/products.html" class="nav-link">Marketplace</a>
+        <a href="/pages/seller.html" class="nav-link" style="font-weight: 600; color: var(--color-primary);">Artisans</a>
+        <div class="auth-buttons" id="auth-container">
+          <button class="btn btn-outline" id="btn-login" style="padding: 0.5rem 1.2rem; font-size: 0.9rem;">Log In</button>
+          <button class="btn btn-primary" id="btn-signup" style="padding: 0.5rem 1.2rem; font-size: 0.9rem;">Join</button>
+        </div>
+        <a href="/pages/cart.html" class="cart-icon">
+          🛒 <span class="cart-badge">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SELLER PROFILE LAYOUT -->
+  <main class="seller-profile section-padding" style="padding-top: 8rem;">
+     <div class="seller-hero">
+        <img src="https://images.unsplash.com/photo-1544983057-0a424a1dc5f4?q=80&w=1200&auto=format&fit=crop" alt="Cover Image" class="seller-cover">
+        <div class="seller-info">
+           <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=400&auto=format&fit=crop" alt="Threaded Dreams" class="seller-avatar">
+           <h1 class="seller-name">Threaded Dreams</h1>
+           <p class="seller-bio">Weaving stories through vintage textiles and modern macrame since 2018. Based in Portland, OR. Specializing in wall hangings, plant hangers, and unique woven decor.</p>
+           <button class="btn btn-outline">Message Artisan</button>
+        </div>
+     </div>
+     
+     <div class="seller-products" style="margin-top: 2rem;">
+        <h2 class="section-title" style="font-size: 2rem; margin-bottom: 2rem;">Shop Threaded Dreams</h2>
+        <div class="product-grid" id="seller-product-grid">
+           <!-- JS to load this specific artisan's goods -->
+        </div>
+     </div>
+  </main>
+  
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-bottom">
+      <p>&copy; 2026 Craft-Hub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/auth.js"></script>
+  <script type="module" src="/js/seller.js"></script>
+</body>
+</html>

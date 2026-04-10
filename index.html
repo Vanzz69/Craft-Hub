@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Craft-Hub | Artisan Marketplace</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo">
+        <span class="logo-icon">🌿</span>
+        Craft-Hub
+      </a>
+      
+      <div class="search-bar">
+        <input type="text" placeholder="Search for handmade goods...">
+        <button class="search-btn">🔍</button>
+      </div>
+
+      <div class="nav-links">
+        <a href="/pages/products.html" class="nav-link">Marketplace</a>
+        <a href="/pages/seller.html" class="nav-link">Artisans</a>
+        <div class="auth-buttons" id="auth-container">
+          <button class="btn btn-outline" id="btn-login">Log In</button>
+          <button class="btn btn-primary" id="btn-signup">Join</button>
+        </div>
+        <a href="/pages/cart.html" class="cart-icon">
+          🛒 <span class="cart-badge">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Handcrafted with <br> <em>Passion & Soul</em></h1>
+      <p class="hero-subtitle">Discover unique, artisan-made goods from independent makers around the world.</p>
+      <div class="hero-actions">
+        <a href="/pages/products.html" class="btn btn-primary btn-large">Shop Marketplace</a>
+        <a href="#" class="btn btn-outline btn-large" id="btn-become-seller">Become a Seller</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="categories section-padding">
+    <h2 class="section-title">Explore by Craft</h2>
+    <div class="category-grid">
+      <div class="category-card" aria-label="Pottery">
+        <div class="category-image pottery-bg"></div>
+        <h3>Ceramics & Pottery</h3>
+      </div>
+      <div class="category-card" aria-label="Woodwork">
+        <div class="category-image wood-bg"></div>
+        <h3>Woodworking</h3>
+      </div>
+      <div class="category-card" aria-label="Textiles">
+        <div class="category-image textile-bg"></div>
+        <h3>Textiles & Woven</h3>
+      </div>
+      <div class="category-card" aria-label="Jewelry">
+        <div class="category-image jewelry-bg"></div>
+        <h3>Handmade Jewelry</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured section-padding bg-light">
+    <h2 class="section-title">Featured Creations</h2>
+    <div class="product-grid" id="featured-products">
+      <div class="product-card skeleton">
+        <div class="product-img-placeholder"></div>
+        <div class="product-info-placeholder"></div>
+      </div>
+      <div class="product-card skeleton">
+        <div class="product-img-placeholder"></div>
+        <div class="product-info-placeholder"></div>
+      </div>
+      <div class="product-card skeleton">
+        <div class="product-img-placeholder"></div>
+        <div class="product-info-placeholder"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h2 class="logo">🌿 Craft-Hub</h2>
+        <p>Elevating the art of handmade.</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>Shop</h4>
+          <a href="#">Categories</a>
+          <a href="#">Featured</a>
+        </div>
+        <div>
+          <h4>Sell</h4>
+          <a href="#">Become a Seller</a>
+          <a href="#">Guidelines</a>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <a href="#">FAQ</a>
+          <a href="#">Contact Us</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Craft-Hub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/main.js"></script>
+</body>
+</html>
