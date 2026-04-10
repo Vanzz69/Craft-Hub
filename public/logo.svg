@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 48" fill="none">
+  <defs>
+    <linearGradient id="leaf-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6b705c"/>
+      <stop offset="100%" stop-color="#C85A32"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C85A32"/>
+      <stop offset="100%" stop-color="#e07a5f"/>
+    </linearGradient>
+  </defs>
+  <!-- Leaf icon -->
+  <g transform="translate(4, 4)">
+    <path d="M20 2C20 2 8 8 4 18C0 28 6 36 16 38C16 38 16 28 20 20C24 28 24 38 24 38C34 36 40 28 36 18C32 8 20 2 20 2Z" fill="url(#leaf-grad)" opacity="0.9"/>
+    <path d="M20 10C20 10 16 18 16 30" stroke="#faf3dd" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+    <path d="M20 16C18 14 14 14 12 16" stroke="#faf3dd" stroke-width="1" stroke-linecap="round" fill="none"/>
+    <path d="M20 22C22 20 26 20 28 22" stroke="#faf3dd" stroke-width="1" stroke-linecap="round" fill="none"/>
+  </g>
+  <!-- Text -->
+  <text x="52" y="22" font-family="'Playfair Display', Georgia, serif" font-size="22" font-weight="700" fill="#3B2818">Craft</text>
+  <text x="52" y="22" font-family="'Playfair Display', Georgia, serif" font-size="22" font-weight="700" fill="#3B2818">Craft</text>
+  <text x="106" y="22" font-family="'Playfair Display', Georgia, serif" font-size="22" font-weight="700" fill="url(#accent)">-Hub</text>
+  <text x="52" y="40" font-family="'Outfit', sans-serif" font-size="9" font-weight="400" fill="#6b705c" letter-spacing="3">ARTISAN MARKETPLACE</text>
+</svg>

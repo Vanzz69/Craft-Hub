@@ -4,67 +4,115 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Artisan Profile | Craft-Hub</title>
-  <link rel="stylesheet" href="/style.css">
+  <meta name="description" content="Meet Threaded Dreams – an independent artisan on Craft-Hub specializing in handwoven textiles and macrame.">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- NAVIGATION -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="/" class="logo">
-        <span class="logo-icon">🌿</span>
-        Craft-Hub
-      </a>
-      
-      <div class="search-bar">
-        <input type="text" placeholder="Search for handmade goods...">
-        <button class="search-btn">🔍</button>
-      </div>
 
-      <div class="nav-links">
-        <a href="/pages/products.html" class="nav-link">Marketplace</a>
-        <a href="/pages/seller.html" class="nav-link" style="font-weight: 600; color: var(--color-primary);">Artisans</a>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../" class="logo">
+        <img src="../logo.svg" alt="Craft-Hub Logo">
+      </a>
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search handmade goods...">
+      </div>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu">☰</button>
+      <div class="nav-links" id="nav-links">
+        <a href="./products.html" class="nav-link">Marketplace</a>
+        <a href="./seller.html" class="nav-link active">Artisans</a>
         <div class="auth-buttons" id="auth-container">
-          <button class="btn btn-outline" id="btn-login" style="padding: 0.5rem 1.2rem; font-size: 0.9rem;">Log In</button>
-          <button class="btn btn-primary" id="btn-signup" style="padding: 0.5rem 1.2rem; font-size: 0.9rem;">Join</button>
+          <button class="btn btn-outline" id="btn-login" style="padding:.5rem 1.2rem;font-size:.9rem">Log In</button>
+          <button class="btn btn-primary" id="btn-signup" style="padding:.5rem 1.2rem;font-size:.9rem">Join</button>
         </div>
-        <a href="/pages/cart.html" class="cart-icon">
-          🛒 <span class="cart-badge">0</span>
+        <a href="./cart.html" class="cart-link">
+          🛒 <span class="cart-badge" id="cart-badge-global">0</span>
         </a>
       </div>
     </div>
   </nav>
 
-  <!-- SELLER PROFILE LAYOUT -->
-  <main class="seller-profile section-padding" style="padding-top: 8rem;">
-     <div class="seller-hero">
-        <img src="https://images.unsplash.com/photo-1544983057-0a424a1dc5f4?q=80&w=1200&auto=format&fit=crop" alt="Cover Image" class="seller-cover">
-        <div class="seller-info">
-           <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=400&auto=format&fit=crop" alt="Threaded Dreams" class="seller-avatar">
-           <h1 class="seller-name">Threaded Dreams</h1>
-           <p class="seller-bio">Weaving stories through vintage textiles and modern macrame since 2018. Based in Portland, OR. Specializing in wall hangings, plant hangers, and unique woven decor.</p>
-           <button class="btn btn-outline">Message Artisan</button>
+  <!-- SELLER PROFILE -->
+  <main class="seller-profile section-padding" style="padding-top:7rem;">
+    <div class="seller-hero">
+      <img src="https://images.unsplash.com/photo-1544983057-0a424a1dc5f4?w=1200&auto=format&fit=crop&q=80" alt="Threaded Dreams Studio" class="seller-cover">
+      <div class="seller-info">
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&auto=format&fit=crop&q=80" alt="Threaded Dreams" class="seller-avatar">
+        <h1 class="seller-name">Threaded Dreams</h1>
+        <p class="seller-bio">Weaving stories through vintage textiles and modern macrame since 2018. Based in Portland, OR. Specializing in wall hangings, plant hangers, and unique woven decor.</p>
+        <div class="seller-stats">
+          <div class="seller-stat"><strong>4</strong><span>Products</span></div>
+          <div class="seller-stat"><strong>4.8</strong><span>Rating</span></div>
+          <div class="seller-stat"><strong>127</strong><span>Reviews</span></div>
+          <div class="seller-stat"><strong>2018</strong><span>Joined</span></div>
         </div>
-     </div>
-     
-     <div class="seller-products" style="margin-top: 2rem;">
-        <h2 class="section-title" style="font-size: 2rem; margin-bottom: 2rem;">Shop Threaded Dreams</h2>
-        <div class="product-grid" id="seller-product-grid">
-           <!-- JS to load this specific artisan's goods -->
+        <button class="btn btn-outline">✉️ Message Artisan</button>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="seller-tabs" id="seller-tabs">
+      <button class="seller-tab active" data-tab="shop">Shop</button>
+      <button class="seller-tab" data-tab="about">About</button>
+      <button class="seller-tab" data-tab="reviews">Reviews</button>
+    </div>
+
+    <!-- TAB: Shop -->
+    <div class="tab-content active" id="tab-shop">
+      <div class="product-grid" id="seller-product-grid">
+        <!-- JS renders -->
+      </div>
+    </div>
+
+    <!-- TAB: About -->
+    <div class="tab-content" id="tab-about">
+      <div style="max-width:700px;margin:0 auto;background:var(--white);border-radius:var(--radius-md);padding:2.5rem;box-shadow:var(--shadow-sm);">
+        <h2 style="font-size:1.75rem;margin-bottom:1rem;">Our Story</h2>
+        <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">Threaded Dreams was born from a love of fiber art and a desire to create pieces that bring warmth and character to any space. Founded by Maya Chen in her Portland studio, every piece is hand-woven using sustainably sourced natural fibers.</p>
+        <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">We use only organic cotton, reclaimed wood, and locally sourced dyes. Each piece takes between 8-40 hours to create, ensuring that every knot, loop, and weave is placed with intention and care.</p>
+        <h3 style="font-size:1.25rem;margin-bottom:.75rem;margin-top:2rem;">Materials We Use</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem;">
+          <span style="background:var(--primary-light);color:var(--primary);padding:.4rem 1rem;border-radius:50px;font-size:.85rem;">Organic Cotton</span>
+          <span style="background:var(--primary-light);color:var(--primary);padding:.4rem 1rem;border-radius:50px;font-size:.85rem;">Natural Jute</span>
+          <span style="background:var(--primary-light);color:var(--primary);padding:.4rem 1rem;border-radius:50px;font-size:.85rem;">Reclaimed Driftwood</span>
+          <span style="background:var(--primary-light);color:var(--primary);padding:.4rem 1rem;border-radius:50px;font-size:.85rem;">Plant-Based Dyes</span>
         </div>
-     </div>
+      </div>
+    </div>
+
+    <!-- TAB: Reviews -->
+    <div class="tab-content" id="tab-reviews">
+      <div id="reviews-container" style="max-width:700px;margin:0 auto;">
+        <!-- JS renders -->
+      </div>
+    </div>
   </main>
-  
+
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-bottom">
-      <p>&copy; 2026 Craft-Hub. All rights reserved.</p>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="logo" style="margin-bottom:.25rem">
+          <img src="../favicon.svg" alt="Craft-Hub" style="height:28px;filter:brightness(10)"> Craft-Hub
+        </div>
+        <p>Elevating the art of handmade.</p>
+      </div>
+      <div class="footer-col"><h4>Shop</h4><a href="./products.html">All Products</a></div>
+      <div class="footer-col"><h4>Sell</h4><a href="#">Become a Seller</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="#">Help Center</a><a href="#">Contact Us</a></div>
     </div>
+    <div class="footer-bottom"><p>&copy; 2026 Craft-Hub. All rights reserved.</p></div>
   </footer>
 
-  <script type="module" src="/js/auth.js"></script>
-  <script type="module" src="/js/seller.js"></script>
+  <div class="toast-container" id="toast-container"></div>
+
+  <script type="module" src="../js/auth.js"></script>
+  <script type="module" src="../js/seller.js"></script>
 </body>
 </html>

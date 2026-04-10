@@ -4,51 +4,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Cart | Craft-Hub</title>
-  <link rel="stylesheet" href="/style.css">
+  <meta name="description" content="Review your handmade selections and checkout securely on Craft-Hub.">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- NAVIGATION -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="/" class="logo">
-        <span class="logo-icon">🌿</span>
-        Craft-Hub
-      </a>
-      
-      <div class="search-bar">
-        <input type="text" placeholder="Search for handmade goods...">
-        <button class="search-btn">🔍</button>
-      </div>
 
-      <div class="nav-links">
-        <a href="/pages/products.html" class="nav-link">Marketplace</a>
-        <a href="/pages/seller.html" class="nav-link">Artisans</a>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../" class="logo">
+        <img src="../logo.svg" alt="Craft-Hub Logo">
+      </a>
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search handmade goods...">
+      </div>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu">☰</button>
+      <div class="nav-links" id="nav-links">
+        <a href="./products.html" class="nav-link">Marketplace</a>
+        <a href="./seller.html" class="nav-link">Artisans</a>
         <div class="auth-buttons" id="auth-container">
-          <button class="btn btn-outline" id="btn-login" style="padding: 0.5rem 1.2rem; font-size: 0.9rem;">Log In</button>
-          <button class="btn btn-primary" id="btn-signup" style="padding: 0.5rem 1.2rem; font-size: 0.9rem;">Join</button>
+          <button class="btn btn-outline" id="btn-login" style="padding:.5rem 1.2rem;font-size:.9rem">Log In</button>
+          <button class="btn btn-primary" id="btn-signup" style="padding:.5rem 1.2rem;font-size:.9rem">Join</button>
         </div>
-        <a href="/pages/cart.html" class="cart-icon">
-          🛒 <span class="cart-badge" id="cart-badge-dynamic">2</span>
+        <a href="./cart.html" class="cart-link">
+          🛒 <span class="cart-badge" id="cart-badge-global">0</span>
         </a>
       </div>
     </div>
   </nav>
 
-  <!-- CART LAYOUT -->
-  <main class="section-padding" style="padding-top: 8rem;">
-    <h1 class="section-title" style="text-align: left; max-width: 1200px; margin: 0 auto 2rem;">Your <em>Basket</em></h1>
+  <!-- CART -->
+  <main class="section-padding" style="padding-top:7rem;">
+    <div style="max-width:1200px;margin:0 auto;">
+      <h1 class="section-title" style="text-align:left;margin-bottom:.5rem;">Your <em style="color:var(--primary)">Basket</em></h1>
+      <p class="product-count" id="cart-item-count-label" style="margin-bottom:2rem;color:var(--text-muted);">0 items</p>
+    </div>
     <div class="cart-layout">
-      <!-- Items List -->
+      <!-- Items -->
       <div class="cart-items" id="cart-items-container">
-        <!-- JS iterates items here -->
+        <!-- JS renders -->
       </div>
-      
-      <!-- Order Summary -->
+
+      <!-- Summary -->
       <div class="cart-summary">
-        <h2 style="font-family: var(--font-sans); margin-bottom: 1.5rem; font-weight: 500;">Order Summary</h2>
+        <h2>Order Summary</h2>
         <div class="summary-row">
           <span>Subtotal (<span id="cart-item-count">0</span> items)</span>
           <span id="cart-subtotal">$0.00</span>
@@ -57,23 +61,50 @@
           <span>Artisan Shipping</span>
           <span id="cart-shipping">$0.00</span>
         </div>
+
+        <!-- Promo Code -->
+        <div style="margin:1rem 0;">
+          <div style="display:flex;gap:.5rem;">
+            <input type="text" id="promo-input" placeholder="Promo code" style="flex:1;padding:.6rem .75rem;border-radius:var(--radius-sm);border:1px solid rgba(107,112,92,0.2);font-family:var(--sans);font-size:.9rem;outline:none;">
+            <button class="btn btn-outline" style="padding:.5rem 1rem;font-size:.85rem;" id="apply-promo">Apply</button>
+          </div>
+          <p id="promo-msg" style="font-size:.8rem;margin-top:.35rem;color:var(--primary);display:none;"></p>
+        </div>
+
         <div class="summary-row summary-total">
           <span>Estimated Total</span>
-          <span id="cart-total" style="color: var(--color-primary);">$0.00</span>
+          <span id="cart-total" style="color:var(--primary)">$0.00</span>
         </div>
-        <button class="btn btn-primary" style="width: 100%; font-size: 1.1rem; padding: 1rem;" onclick="checkout()">Secure Checkout 🔒</button>
+        <button class="btn btn-primary" style="width:100%;font-size:1.05rem;padding:.85rem;" id="checkout-btn">Secure Checkout 🔒</button>
+
+        <div class="trust-badges">
+          <div class="trust-badge"><span>🔒</span>Secure</div>
+          <div class="trust-badge"><span>📦</span>Free Return</div>
+          <div class="trust-badge"><span>🌿</span>Eco-Friendly</div>
+        </div>
       </div>
     </div>
   </main>
-  
+
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-bottom">
-      <p>&copy; 2026 Craft-Hub. All rights reserved.</p>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="logo" style="margin-bottom:.25rem">
+          <img src="../favicon.svg" alt="Craft-Hub" style="height:28px;filter:brightness(10)"> Craft-Hub
+        </div>
+        <p>Elevating the art of handmade.</p>
+      </div>
+      <div class="footer-col"><h4>Shop</h4><a href="./products.html">All Products</a></div>
+      <div class="footer-col"><h4>Sell</h4><a href="#">Become a Seller</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="#">Help Center</a><a href="#">Contact Us</a></div>
     </div>
+    <div class="footer-bottom"><p>&copy; 2026 Craft-Hub. All rights reserved.</p></div>
   </footer>
 
-  <script type="module" src="/js/auth.js"></script>
-  <script type="module" src="/js/cart.js"></script>
+  <div class="toast-container" id="toast-container"></div>
+
+  <script type="module" src="../js/auth.js"></script>
+  <script type="module" src="../js/cart.js"></script>
 </body>
 </html>
