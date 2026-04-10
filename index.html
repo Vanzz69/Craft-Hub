@@ -29,7 +29,7 @@
 
       <div class="nav-links" id="nav-links">
         <a href="./pages/products.html" class="nav-link">Marketplace</a>
-        <a href="./pages/seller.html" class="nav-link">Artisans</a>
+        <a href="./pages/artisans.html" class="nav-link">Artisans</a>
         <div class="auth-buttons" id="auth-container">
           <button class="btn btn-outline" id="btn-login" style="padding:.5rem 1.2rem;font-size:.9rem">Log In</button>
           <button class="btn btn-primary" id="btn-signup" style="padding:.5rem 1.2rem;font-size:.9rem">Join</button>
@@ -43,13 +43,31 @@
 
   <!-- ==================== HERO ==================== -->
   <header class="hero" id="hero">
+    <div class="hero-aurora"></div>
     <canvas class="hero-particles" id="hero-particles"></canvas>
+
+    <!-- Floating product images -->
+    <div class="hero-floaters">
+      <img src="./images/mug.png" alt="" class="floater floater-1">
+      <img src="./images/pendant.png" alt="" class="floater floater-2">
+      <img src="./images/bowl.png" alt="" class="floater floater-3">
+      <img src="./images/wall-hanging.png" alt="" class="floater floater-4">
+    </div>
+
     <div class="hero-content animate">
-      <div class="hero-badge">🌿 Welcome to Craft-Hub</div>
-      <h1 class="hero-title">Handcrafted with <br><em>Passion & Soul</em></h1>
-      <p class="hero-subtitle">Discover unique, artisan-made goods from independent makers around the world. Every piece tells a story.</p>
+      <div class="hero-badge">🌿 India's Premier Artisan Marketplace</div>
+      <h1 class="hero-title">Handcrafted with <br><em>Passion & <span id="typewriter-text">Soul</span><span class="typewriter-cursor">|</span></em></h1>
+      <p class="hero-subtitle">Discover extraordinary, one-of-a-kind pieces made by India's finest artisans. Each creation carries a story, a tradition, and a heartbeat of its maker.</p>
+      <div class="hero-chips">
+        <span class="hero-chip">🎨 2,500+ Artisans</span>
+        <span class="hero-chip">📦 18K+ Products</span>
+        <span class="hero-chip">⭐ 4.9 Rating</span>
+      </div>
       <div class="hero-actions">
-        <a href="./pages/products.html" class="btn btn-primary btn-large">Shop Marketplace</a>
+        <a href="./pages/products.html" class="btn btn-primary btn-large">
+          <span>Shop Marketplace</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
         <a href="#" class="btn btn-outline btn-large" id="btn-become-seller">Become a Seller</a>
       </div>
     </div>
@@ -59,66 +77,110 @@
   <section class="section-padding" id="how-it-works">
     <h2 class="section-title reveal">How It Works</h2>
     <div class="section-divider reveal"></div>
-    <p class="section-subtitle reveal">Three simple steps to discover your next handmade treasure</p>
-    <div class="steps-grid">
-      <div class="step-card reveal reveal-delay-1">
-        <div class="step-icon">🔍</div>
-        <h3>Discover</h3>
-        <p>Browse through curated collections of handmade goods from artisans worldwide.</p>
+    <p class="section-subtitle reveal">Your journey to owning something truly special, in three simple steps</p>
+
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+
+      <div class="timeline-step reveal reveal-delay-1">
+        <div class="timeline-number">01</div>
+        <div class="timeline-icon-wrap">
+          <div class="timeline-icon">🔍</div>
+        </div>
+        <div class="timeline-content">
+          <h3>Discover & Explore</h3>
+          <p>Browse through curated collections of handmade goods from artisans across India. Filter by craft, region, price, and artisan.</p>
+          <ul class="timeline-features">
+            <li>✦ Smart search & filters</li>
+            <li>✦ Curated collections weekly</li>
+            <li>✦ Artisan stories & videos</li>
+          </ul>
+        </div>
       </div>
-      <div class="step-card reveal reveal-delay-2">
-        <div class="step-icon">🤝</div>
-        <h3>Connect</h3>
-        <p>Message artisans directly, learn their story, and request custom pieces.</p>
+
+      <div class="timeline-step reveal reveal-delay-2">
+        <div class="timeline-number">02</div>
+        <div class="timeline-icon-wrap">
+          <div class="timeline-icon">🤝</div>
+        </div>
+        <div class="timeline-content">
+          <h3>Connect & Customize</h3>
+          <p>Message artisans directly, learn their craft story, request custom pieces, and get personalized recommendations.</p>
+          <ul class="timeline-features">
+            <li>✦ Direct artisan messaging</li>
+            <li>✦ Custom order requests</li>
+            <li>✦ Live craft sessions</li>
+          </ul>
+        </div>
       </div>
-      <div class="step-card reveal reveal-delay-3">
-        <div class="step-icon">📦</div>
-        <h3>Enjoy</h3>
-        <p>Receive your handcrafted item with love, straight from the maker's workshop.</p>
+
+      <div class="timeline-step reveal reveal-delay-3">
+        <div class="timeline-number">03</div>
+        <div class="timeline-icon-wrap">
+          <div class="timeline-icon">📦</div>
+        </div>
+        <div class="timeline-content">
+          <h3>Order & Enjoy</h3>
+          <p>Secure checkout with real-time tracking. Receive your handcrafted treasure with love, packed and shipped with care.</p>
+          <ul class="timeline-features">
+            <li>✦ Secure payment via UPI/Cards</li>
+            <li>✦ Real-time order tracking</li>
+            <li>✦ Handmade guarantee</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WHY CRAFT-HUB ==================== -->
+  <section class="section-padding bg-light" id="why-crafthub">
+    <h2 class="section-title reveal">Why Craft-Hub?</h2>
+    <div class="section-divider reveal"></div>
+    <p class="section-subtitle reveal">What makes us the trusted choice for artisan lovers</p>
+    <div class="trust-grid">
+      <div class="trust-card reveal reveal-delay-1">
+        <div class="trust-icon-wrap"><span class="trust-icon-big">🛡️</span></div>
+        <h3>Authenticity Guaranteed</h3>
+        <p>Every product is verified handmade. We personally vet artisans and their craftsmanship before onboarding.</p>
+      </div>
+      <div class="trust-card reveal reveal-delay-2">
+        <div class="trust-icon-wrap"><span class="trust-icon-big">🤲</span></div>
+        <h3>Direct from Artisans</h3>
+        <p>Zero middlemen. Your money goes directly to the artisan, ensuring fair trade and sustainable livelihoods.</p>
+      </div>
+      <div class="trust-card reveal reveal-delay-3">
+        <div class="trust-icon-wrap"><span class="trust-icon-big">🔒</span></div>
+        <h3>Secure Payments</h3>
+        <p>Pay confidently with UPI, cards, or net banking. All transactions are encrypted and buyer-protected.</p>
+      </div>
+      <div class="trust-card reveal reveal-delay-4">
+        <div class="trust-icon-wrap"><span class="trust-icon-big">🔄</span></div>
+        <h3>Easy Returns</h3>
+        <p>Not satisfied? Return within 7 days for a full refund. We handle all shipping logistics for you.</p>
       </div>
     </div>
   </section>
 
   <!-- ==================== CATEGORIES ==================== -->
-  <section class="section-padding bg-light" id="categories">
+  <section class="section-padding" id="categories">
     <h2 class="section-title reveal">Explore by Craft</h2>
     <div class="section-divider reveal"></div>
-    <p class="section-subtitle reveal">Find what inspires you</p>
-    <div class="category-grid">
-      <a href="./pages/products.html?cat=pottery" class="category-card reveal reveal-delay-1">
-        <div class="category-image">
-          <img src="/Craft-Hub/images/pottery.png" alt="Ceramics & Pottery">
-        </div>
-        <h3>Ceramics & Pottery</h3>
-      </a>
-      <a href="./pages/products.html?cat=woodwork" class="category-card reveal reveal-delay-2">
-        <div class="category-image">
-          <img src="/Craft-Hub/images/woodwork.png" alt="Woodworking">
-        </div>
-        <h3>Woodworking</h3>
-      </a>
-      <a href="./pages/products.html?cat=textiles" class="category-card reveal reveal-delay-3">
-        <div class="category-image">
-          <img src="/Craft-Hub/images/textiles.png" alt="Textiles & Woven">
-        </div>
-        <h3>Textiles & Woven</h3>
-      </a>
-      <a href="./pages/products.html?cat=jewelry" class="category-card reveal reveal-delay-4">
-        <div class="category-image">
-          <img src="/Craft-Hub/images/jewelry.png" alt="Handmade Jewelry">
-        </div>
-        <h3>Handmade Jewelry</h3>
-      </a>
+    <p class="section-subtitle reveal">Discover the art form that speaks to you</p>
+    <div class="category-grid" id="category-grid">
+      <!-- JS populates with correct image paths -->
     </div>
   </section>
 
   <!-- ==================== FEATURED PRODUCTS ==================== -->
-  <section class="section-padding" id="featured">
+  <section class="section-padding bg-light" id="featured">
     <h2 class="section-title reveal">Featured Creations</h2>
     <div class="section-divider reveal"></div>
-    <p class="section-subtitle reveal">Hand-picked by our community</p>
-    <div class="product-grid" id="featured-products">
+    <p class="section-subtitle reveal">Hand-picked treasures loved by our community</p>
+    <div class="product-grid" id="featured-grid">
       <!-- JS populates this -->
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;" class="reveal">
+      <a href="./pages/products.html" class="btn btn-primary btn-large">View All Products →</a>
     </div>
   </section>
 
@@ -126,29 +188,90 @@
   <section class="stats-section section-padding" id="stats">
     <div class="stats-grid">
       <div class="stat-item reveal reveal-delay-1">
+        <span class="stat-emoji">🎨</span>
         <h3><span class="counter" data-target="2500">0</span>+</h3>
-        <p>Artisans Worldwide</p>
+        <p>Artisans Across India</p>
       </div>
       <div class="stat-item reveal reveal-delay-2">
+        <span class="stat-emoji">📦</span>
         <h3><span class="counter" data-target="18000">0</span>+</h3>
         <p>Unique Products</p>
       </div>
       <div class="stat-item reveal reveal-delay-3">
+        <span class="stat-emoji">😊</span>
         <h3><span class="counter" data-target="45000">0</span>+</h3>
         <p>Happy Customers</p>
+      </div>
+      <div class="stat-item reveal reveal-delay-4">
+        <span class="stat-emoji">⭐</span>
+        <h3><span class="counter" data-target="4.9" data-decimal="true">0</span></h3>
+        <p>Average Rating</p>
       </div>
     </div>
   </section>
 
   <!-- ==================== TESTIMONIALS ==================== -->
   <section class="section-padding bg-light" id="testimonials">
-    <h2 class="section-title reveal">What People Say</h2>
+    <h2 class="section-title reveal">What Our Community Says</h2>
     <div class="section-divider reveal"></div>
-    <p class="section-subtitle reveal">Stories from our community</p>
-    <div class="testimonial-card reveal">
-      <p class="testimonial-text" id="testimonial-text">The quality of craftwork I've found on Craft-Hub is extraordinary. Each piece truly carries the heart and soul of its maker.</p>
-      <p class="testimonial-author" id="testimonial-author">Sarah Mitchell</p>
-      <p class="testimonial-role" id="testimonial-role">Interior Designer, Portland</p>
+    <p class="section-subtitle reveal">Stories from artisan lovers across India</p>
+
+    <div class="testimonial-carousel reveal" id="testimonial-carousel">
+      <div class="testimonial-track" id="testimonial-track">
+        <!-- Slide 1 -->
+        <div class="testimonial-slide">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"The quality of craftwork I've found on Craft-Hub is extraordinary. Each piece truly carries the heart and soul of its maker. My living room has never looked better!"</p>
+          <div class="testimonial-author-info">
+            <div class="testimonial-avatar">PM</div>
+            <div>
+              <p class="testimonial-author">Priya Menon</p>
+              <p class="testimonial-role">Interior Designer, Kochi</p>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="testimonial-slide">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"I gifted a custom wooden jewelry box from Dastakar Wood to my wife. The artisan personally engraved our names on it. The personal touch is what makes Craft-Hub special."</p>
+          <div class="testimonial-author-info">
+            <div class="testimonial-avatar">RS</div>
+            <div>
+              <p class="testimonial-author">Rajesh Sharma</p>
+              <p class="testimonial-role">Software Engineer, Bangalore</p>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="testimonial-slide">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"As an artisan myself, Craft-Hub has changed my life. I went from selling at local fairs to shipping across India. My income has tripled and I can focus purely on my craft."</p>
+          <div class="testimonial-author-info">
+            <div class="testimonial-avatar">AK</div>
+            <div>
+              <p class="testimonial-author">Ananya Kumari</p>
+              <p class="testimonial-role">Ceramic Artisan, Jaipur</p>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 4 -->
+        <div class="testimonial-slide">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Every Diwali, I order handmade gifts from Craft-Hub for my family. The macrame planters, brass diyas, and ceramic vases are always a hit. The quality is consistently phenomenal."</p>
+          <div class="testimonial-author-info">
+            <div class="testimonial-avatar">NP</div>
+            <div>
+              <p class="testimonial-author">Neha Patel</p>
+              <p class="testimonial-role">Teacher, Mumbai</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-nav">
+        <button class="testimonial-arrow testimonial-prev" id="test-prev" aria-label="Previous">‹</button>
+        <div class="testimonial-dots" id="testimonial-dots"></div>
+        <button class="testimonial-arrow testimonial-next" id="test-next" aria-label="Next">›</button>
+      </div>
     </div>
   </section>
 
@@ -167,7 +290,7 @@
     <div class="footer-content">
       <div class="footer-brand">
         <div class="logo" style="margin-bottom:.25rem">
-          <img src="./public/favicon.svg" alt="Craft-Hub" style="height:28px;filter:brightness(10)"> Craft-Hub
+          <img src="./favicon.svg" alt="Craft-Hub" style="height:28px;filter:brightness(10)"> Craft-Hub
         </div>
         <p>Elevating the art of handmade.<br>Connecting makers with the world.</p>
         <div class="social-links">

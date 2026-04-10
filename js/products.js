@@ -64,21 +64,22 @@ function render() {
   }
 
   grid.innerHTML = items.map((p, i) => `
-    <div class="product-card" style="animation:fadeUp .4s ${i*0.06}s ease both;">
+    <a href="./product.html?id=${p.id}" class="product-card" style="animation:fadeUp .4s ${i*0.06}s ease both;">
       <div class="product-card-image">
         <img src="${p.img}" alt="${p.title}" loading="lazy"
              onerror="this.src='https://placehold.co/500x400/EFD9B4/3B2818?text=${encodeURIComponent(p.title)}'">
         <span class="product-badge">${p.category}</span>
+        <div class="product-quick-view">View Details</div>
       </div>
       <div class="product-card-body">
         <h3>${p.title}</h3>
         <p class="product-artisan">by ${p.artisan}</p>
         <div class="product-card-footer">
           <span class="product-price">₹${p.price.toLocaleString('en-IN')}</span>
-          <button class="btn btn-outline btn-add-cart" data-id="${p.id}">Add to Cart</button>
+          <button class="btn btn-outline btn-add-cart" data-id="${p.id}" onclick="event.preventDefault(); event.stopPropagation();">Add to Cart</button>
         </div>
       </div>
-    </div>
+    </a>
   `).join('');
 
   grid.querySelectorAll('.btn-add-cart').forEach(btn => {
