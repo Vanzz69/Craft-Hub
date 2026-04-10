@@ -21,38 +21,70 @@ const MOCK_PRODUCTS = [
 const grid = document.getElementById('main-product-grid');
 const countEl = document.getElementById('product-count');
 const searchInput = document.getElementById('search-input');
-const catBtns = document.querySelectorAll('.filter-btn');
 const sortSelect = document.getElementById('sort-select');
-const priceRange = document.getElementById('price-range');
-const priceVal = document.getElementById('price-val');
+const categoryFilters = document.querySelectorAll('.category-filter');
+const priceFilters = document.querySelectorAll('.price-filter');
+const clearFiltersBtn = document.getElementById('clear-filters');
 
-let activeCat = 'all';
+let activeCategories = [];
 let searchTerm = '';
-let maxPrice = 50000;
+let priceRange = 'all';
 
 // ===== CART HELPERS =====
 function getCart() { try { return JSON.parse(localStorage.getItem('crafthub_cart') || '[]'); } catch { return []; } }
 function saveCart(cart) { localStorage.setItem('crafthub_cart', JSON.stringify(cart)); }
-function updateBadge() { const c = getCart().reduce((s,i)=>s+i.quantity,0); document.querySelectorAll('.cart-badge').forEach(b=>b.textContent=c); }
-window.showToast = window.showToast || function(msg, type) { const c=document.getElementById('toast-container'); if(!c) return; const t=document.createElement('div'); t.className=`toast ${type}`; t.innerHTML=`<span>${type==='success'?'✅':'❌'}</span> <span>${msg}</span>`; c.appendChild(t); setTimeout(()=>{t.style.animation='slideOutRight .3s ease forwards';setTimeout(()=>t.remove(),300);},3000); };
+function updateBadge() { const c = getCart().reduce((s,i) => s + i.quantity, 0); document.querySelectorAll('.cart-badge').forEach(b => b.textContent = c); }
+window.showToast = window.showToast || function(msg, type) {
+  const c = document.getElementById('toast-container'); if (!c) return;
+  const t = document.createElement('div'); t.className = `toast ${type}`;
+  t.innerHTML = `<span>${type === 'success' ? '✅' : '❌'}</span> <span>${msg}</span>`;
+  c.appendChild(t);
+  setTimeout(() => { t.style.animation = 'slideOutRight .3s ease forwards'; setTimeout(() => t.remove(), 300); }, 3000);
+};
 
-// URL param filter
+// URL param filter – pre-check category checkbox
 const params = new URLSearchParams(window.location.search);
-if (params.get('cat')) { activeCat = params.get('cat'); }
+if (params.get('cat')) {
+  activeCategories = [params.get('cat')];
+  categoryFilters.forEach(cb => {
+    if (cb.value === params.get('cat')) cb.checked = true;
+  });
+}
+
+// ===== PRICE FILTER LOGIC =====
+function matchesPrice(price) {
+  switch (priceRange) {
+    case 'under2000': return price < 2000;
+    case '2000to5000': return price >= 2000 && price <= 5000;
+    case '5000to10000': return price > 5000 && price <= 10000;
+    case 'over10000': return price > 10000;
+    default: return true;
+  }
+}
 
 // ===== RENDER =====
 function render() {
   if (!grid) return;
   let items = [...MOCK_PRODUCTS];
 
-  if (activeCat !== 'all') items = items.filter(p => p.category === activeCat);
-  if (searchTerm) items = items.filter(p => p.title.toLowerCase().includes(searchTerm) || p.artisan.toLowerCase().includes(searchTerm));
-  items = items.filter(p => p.price <= maxPrice);
+  // Category filter (checkbox – multiple allowed)
+  if (activeCategories.length > 0) {
+    items = items.filter(p => activeCategories.includes(p.category));
+  }
 
+  // Search filter
+  if (searchTerm) {
+    items = items.filter(p => p.title.toLowerCase().includes(searchTerm) || p.artisan.toLowerCase().includes(searchTerm));
+  }
+
+  // Price filter
+  items = items.filter(p => matchesPrice(p.price));
+
+  // Sort
   const sort = sortSelect?.value || 'featured';
-  if (sort === 'price-asc') items.sort((a,b) => a.price - b.price);
-  else if (sort === 'price-desc') items.sort((a,b) => b.price - a.price);
-  else if (sort === 'name') items.sort((a,b) => a.title.localeCompare(b.title));
+  if (sort === 'price-low') items.sort((a, b) => a.price - b.price);
+  else if (sort === 'price-high') items.sort((a, b) => b.price - a.price);
+  else if (sort === 'name') items.sort((a, b) => a.title.localeCompare(b.title));
 
   countEl.textContent = items.length;
 
@@ -64,7 +96,7 @@ function render() {
   }
 
   grid.innerHTML = items.map((p, i) => `
-    <a href="./product.html?id=${p.id}" class="product-card" style="animation:fadeUp .4s ${i*0.06}s ease both;">
+    <a href="./product.html?id=${p.id}" class="product-card" style="animation:fadeUp .4s ${i * 0.06}s ease both;">
       <div class="product-card-image">
         <img src="${p.img}" alt="${p.title}" loading="lazy"
              onerror="this.src='https://placehold.co/500x400/EFD9B4/3B2818?text=${encodeURIComponent(p.title)}'">
@@ -83,31 +115,60 @@ function render() {
   `).join('');
 
   grid.querySelectorAll('.btn-add-cart').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const p = MOCK_PRODUCTS.find(x=>x.id===parseInt(btn.dataset.id)); if(!p) return;
-      const cart=getCart(); const e=cart.find(i=>i.id===p.id); if(e) e.quantity++; else cart.push({...p,quantity:1});
-      saveCart(cart); updateBadge(); showToast(`${p.title} added to basket!`,'success');
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const p = MOCK_PRODUCTS.find(x => x.id === parseInt(btn.dataset.id));
+      if (!p) return;
+      const cart = getCart();
+      const existing = cart.find(i => i.id === p.id);
+      if (existing) existing.quantity++;
+      else cart.push({ ...p, quantity: 1 });
+      saveCart(cart);
+      updateBadge();
+      showToast(`${p.title} added to basket! 🛒`, 'success');
     });
   });
 }
 
-// ===== LISTENERS =====
-catBtns.forEach(btn => {
-  if (btn.dataset.category === activeCat) { catBtns.forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }
-  btn.addEventListener('click', () => { catBtns.forEach(b=>b.classList.remove('active')); btn.classList.add('active'); activeCat = btn.dataset.category; render(); });
+// ===== CATEGORY FILTER LISTENERS =====
+categoryFilters.forEach(cb => {
+  cb.addEventListener('change', () => {
+    activeCategories = [...categoryFilters].filter(c => c.checked).map(c => c.value);
+    render();
+  });
 });
+
+// ===== PRICE FILTER LISTENERS =====
+priceFilters.forEach(radio => {
+  radio.addEventListener('change', () => {
+    priceRange = radio.value;
+    render();
+  });
+});
+
+// ===== SEARCH =====
 if (searchInput) searchInput.addEventListener('input', (e) => { searchTerm = e.target.value.toLowerCase(); render(); });
+
+// ===== SORT =====
 if (sortSelect) sortSelect.addEventListener('change', render);
-if (priceRange) {
-  priceRange.max = 50000;
-  priceRange.value = 50000;
-  priceRange.addEventListener('input', (e) => { maxPrice = parseInt(e.target.value); priceVal.textContent = `₹${maxPrice.toLocaleString('en-IN')}`; render(); });
-  priceVal.textContent = `₹${maxPrice.toLocaleString('en-IN')}`;
+
+// ===== CLEAR ALL =====
+if (clearFiltersBtn) {
+  clearFiltersBtn.addEventListener('click', () => {
+    categoryFilters.forEach(cb => cb.checked = false);
+    priceFilters.forEach(r => { r.checked = r.value === 'all'; });
+    activeCategories = [];
+    priceRange = 'all';
+    searchTerm = '';
+    if (searchInput) searchInput.value = '';
+    render();
+  });
 }
 
 // ===== NAV =====
 const toggle = document.getElementById('mobile-toggle'), navLinks = document.getElementById('nav-links');
-if(toggle&&navLinks){toggle.addEventListener('click',()=>{navLinks.classList.toggle('open');toggle.textContent=navLinks.classList.contains('open')?'✕':'☰';});}
-const nav = document.getElementById('navbar'); if(nav) window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>50));
+if (toggle && navLinks) { toggle.addEventListener('click', () => { navLinks.classList.toggle('open'); toggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰'; }); }
+const nav = document.getElementById('navbar'); if (nav) window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
 
 render(); updateBadge();
