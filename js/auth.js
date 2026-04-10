@@ -212,8 +212,12 @@ onAuthStateChanged(auth, async (user) => {
         name = docSnap.data().name || name;
       }
       const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+      const isPages = window.location.pathname.includes('/pages/');
+      const dashLink = role === 'seller' ? `<a href="${isPages ? './' : './pages/'}dashboard.html" style="color:var(--primary);font-weight:500;font-size:.9rem;text-decoration:none;margin-right:.25rem;">Dashboard</a>` : '';
+
       authContainer.innerHTML = `
         <div style="display:flex;align-items:center;gap:.75rem;">
+          ${dashLink}
           <div style="width:34px;height:34px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:600">${initials}</div>
           <span style="font-weight:500;color:var(--primary);font-size:.9rem">${name.split(' ')[0]}</span>
           <button class="btn btn-outline" id="btn-logout" style="padding:.4rem 1rem;font-size:.8rem">Log Out</button>

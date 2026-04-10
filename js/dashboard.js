@@ -3,17 +3,20 @@ import { auth, db } from './firebase-config.js';
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 
+// ===== BASE URL =====
+const BASE = import.meta.env.BASE_URL;
+
 // ===== MOCK SELLER PRODUCTS (localStorage-backed) =====
 const DEFAULT_PRODUCTS = [
-  { id: 101, title: 'Handwoven Basket', desc: 'Sturdy woven basket from natural reeds', price: 38, category: 'textiles', img: 'https://images.unsplash.com/photo-1622372738946-62e02505feb3?w=500&auto=format&fit=crop&q=80' },
-  { id: 102, title: 'Ceramic Serving Plate', desc: 'Glazed earthenware plate – food safe', price: 42, category: 'pottery', img: 'https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?w=500&auto=format&fit=crop&q=80' },
+  { id: 101, title: 'Handwoven Jute Basket', desc: 'Sturdy woven basket from natural jute fibres', price: 3199, category: 'textiles', img: `${BASE}images/plant-hanger.png` },
+  { id: 102, title: 'Ceramic Serving Plate', desc: 'Hand-glazed earthenware plate – food safe', price: 3499, category: 'pottery', img: `${BASE}images/mug.png` },
 ];
 
 const MOCK_ORDERS = [
-  { id: 'ORD-8271', product: 'Handwoven Basket', buyer: 'Sarah M.', date: 'Apr 5, 2026', status: 'Shipped', total: '$38.00' },
-  { id: 'ORD-8245', product: 'Ceramic Serving Plate', buyer: 'David L.', date: 'Apr 2, 2026', status: 'Delivered', total: '$42.00' },
-  { id: 'ORD-8190', product: 'Handwoven Basket', buyer: 'Elena R.', date: 'Mar 28, 2026', status: 'Delivered', total: '$38.00' },
-  { id: 'ORD-8133', product: 'Ceramic Serving Plate', buyer: 'James K.', date: 'Mar 22, 2026', status: 'Delivered', total: '$42.00' },
+  { id: 'ORD-8271', product: 'Handwoven Jute Basket', buyer: 'Aditi M.', date: 'Apr 5, 2026', status: 'Shipped', total: '₹3,199' },
+  { id: 'ORD-8245', product: 'Ceramic Serving Plate', buyer: 'Deepak L.', date: 'Apr 2, 2026', status: 'Delivered', total: '₹3,499' },
+  { id: 'ORD-8190', product: 'Handwoven Jute Basket', buyer: 'Neha R.', date: 'Mar 28, 2026', status: 'Delivered', total: '₹3,199' },
+  { id: 'ORD-8133', product: 'Ceramic Serving Plate', buyer: 'Rajesh K.', date: 'Mar 22, 2026', status: 'Delivered', total: '₹3,499' },
 ];
 
 function getSellerProducts() {
@@ -51,7 +54,7 @@ function renderProducts() {
         <h3>${p.title}</h3>
         <p class="product-artisan" style="font-size:.85rem;">${p.desc || ''}</p>
         <div class="product-card-footer">
-          <span class="product-price">$${p.price}</span>
+          <span class="product-price">₹${p.price.toLocaleString('en-IN')}</span>
           <div style="display:flex;gap:.5rem;">
             <button class="btn btn-outline btn-edit" data-id="${p.id}" style="padding:.35rem .75rem;font-size:.8rem;">Edit</button>
             <button class="btn btn-outline btn-delete" data-id="${p.id}" style="padding:.35rem .75rem;font-size:.8rem;color:#d62828;border-color:#d62828;">Delete</button>

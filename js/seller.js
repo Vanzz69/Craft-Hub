@@ -1,18 +1,21 @@
+// ===== BASE URL =====
+const BASE = import.meta.env.BASE_URL;
+
 // ===== SELLER PRODUCTS =====
 const SELLER_PRODUCTS = [
-  { id: 2, title: 'Woven Wall Hanging', artisan: 'Threaded Dreams', price: 85, category: 'textiles', img: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=500&auto=format&fit=crop&q=80' },
-  { id: 6, title: 'Macrame Plant Hanger', artisan: 'Threaded Dreams', price: 28, category: 'textiles', img: 'https://images.unsplash.com/photo-1622372738946-62e02505feb3?w=500&auto=format&fit=crop&q=80' },
-  { id: 9, title: 'Vintage Woven Runner', artisan: 'Threaded Dreams', price: 42, category: 'textiles', img: 'https://images.unsplash.com/photo-1615486511484-92e172cc4fe0?w=500&auto=format&fit=crop&q=80' },
-  { id: 10, title: 'Cotton Tapestry', artisan: 'Threaded Dreams', price: 110, category: 'textiles', img: 'https://images.unsplash.com/photo-1615529151169-7b1ff50dc7f2?w=500&auto=format&fit=crop&q=80' },
+  { id: 2, title: 'Woven Wall Hanging', artisan: 'Sutra Shilpa', price: 6999, category: 'textiles', img: `${BASE}images/wall-hanging.png` },
+  { id: 6, title: 'Macrame Plant Hanger', artisan: 'Sutra Shilpa', price: 2299, category: 'textiles', img: `${BASE}images/plant-hanger.png` },
+  { id: 9, title: 'Vintage Woven Runner', artisan: 'Sutra Shilpa', price: 3499, category: 'textiles', img: `${BASE}images/runner.png` },
+  { id: 10, title: 'Cotton Tapestry', artisan: 'Sutra Shilpa', price: 8999, category: 'textiles', img: `${BASE}images/textiles.png` },
 ];
 
 const REVIEWS = [
-  { author: 'Sarah M.', rating: 5, date: 'Mar 2026', text: 'The wall hanging is absolutely stunning. The detail and craftsmanship are beyond what I expected.' },
-  { author: 'James K.', rating: 5, date: 'Feb 2026', text: 'Ordered the macrame plant hanger as a gift. Beautifully packaged with a handwritten note!' },
+  { author: 'Aditi M.', rating: 5, date: 'Mar 2026', text: 'The wall hanging is absolutely stunning. The detail and craftsmanship are beyond what I expected.' },
+  { author: 'Rajesh K.', rating: 5, date: 'Feb 2026', text: 'Ordered the macrame plant hanger as a gift. Beautifully packaged with a handwritten note!' },
   { author: 'Priya S.', rating: 4, date: 'Jan 2026', text: 'Beautiful woven runner. Took a bit longer to ship but the quality made up for it.' },
-  { author: 'Elena R.', rating: 5, date: 'Jan 2026', text: 'Maya is incredibly talented. The cotton tapestry is a work of art.' },
-  { author: 'David L.', rating: 5, date: 'Dec 2025', text: 'Fast shipping and excellent communication. The piece looks even better in person.' },
-  { author: 'Anne W.', rating: 4, date: 'Nov 2025', text: 'Great quality materials and beautiful design. Would love more color options.' },
+  { author: 'Neha R.', rating: 5, date: 'Jan 2026', text: 'Maya didi is incredibly talented. The cotton tapestry is a work of art.' },
+  { author: 'Deepak L.', rating: 5, date: 'Dec 2025', text: 'Fast shipping and excellent communication. The piece looks even better in person.' },
+  { author: 'Ananya W.', rating: 4, date: 'Nov 2025', text: 'Great quality materials and beautiful design. Would love more colour options.' },
 ];
 
 function getCart() { try { return JSON.parse(localStorage.getItem('crafthub_cart') || '[]'); } catch { return []; } }
@@ -30,7 +33,7 @@ function renderSellerProducts() {
       <div class="product-card-body">
         <h3>${p.title}</h3><p class="product-artisan">by ${p.artisan}</p>
         <div class="product-card-footer">
-          <span class="product-price">$${p.price}</span>
+          <span class="product-price">₹${p.price.toLocaleString('en-IN')}</span>
           <button class="btn btn-outline btn-add-cart" data-id="${p.id}">Add to Cart</button>
         </div>
       </div>

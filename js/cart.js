@@ -30,7 +30,7 @@ function renderCart() {
       <div class="cart-item-info">
         <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:.2rem;">
           <h3>${item.title}</h3>
-          <span class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</span>
+          <span class="cart-item-price">₹${(item.price * item.quantity).toLocaleString('en-IN')}</span>
         </div>
         <p class="cart-item-artisan">by ${item.artisan}</p>
         <div class="cart-item-bottom">
@@ -48,22 +48,30 @@ function renderCart() {
 }
 
 function updateSummary(cart) {
-  const SHIPPING = 5.00;
+  const SHIPPING = 99;
   let subtotal=0, count=0;
   cart.forEach(i =>{subtotal+=i.price*i.quantity;count+=i.quantity;});
-  const shipping = count > 0 ? SHIPPING : 0;
+  const shipping = count > 0 ? (subtotal >= 2000 ? 0 : SHIPPING) : 0;
   const discountAmt = subtotal * discount;
   const total = subtotal - discountAmt + shipping;
   if(itemCountEl) itemCountEl.textContent = count;
   if(itemCountLabel) itemCountLabel.textContent = `${count} item${count!==1?'s':''}`;
-  if(subtotalEl) subtotalEl.textContent = '$'+subtotal.toFixed(2);
-  if(shippingEl) shippingEl.textContent = shipping > 0 ? '$'+shipping.toFixed(2) : 'Free';
-  if(totalEl) totalEl.textContent = '$'+total.toFixed(2);
+  if(subtotalEl) subtotalEl.textContent = '₹'+subtotal.toLocaleString('en-IN');
+  if(shippingEl) shippingEl.textContent = shipping > 0 ? '₹'+shipping.toLocaleString('en-IN') : 'Free (orders ₹2,000+)';
+  if(totalEl) totalEl.textContent = '₹'+total.toLocaleString('en-IN');
   updateBadge();
 }
 
 // ===== PROMO =====
 if(promoBtn){promoBtn.addEventListener('click',()=>{const code=promoInput?.value?.trim().toUpperCase();if(code==='CRAFT10'){discount=0.10;if(promoMsg){promoMsg.textContent='🎉 10% discount applied!';promoMsg.style.display='block';promoMsg.style.color='var(--primary)';}showToast('CRAFT10 applied!','success');}else if(code==='ARTISAN20'){discount=0.20;if(promoMsg){promoMsg.textContent='🎉 20% discount applied!';promoMsg.style.display='block';promoMsg.style.color='var(--primary)';}showToast('ARTISAN20 applied!','success');}else{discount=0;if(promoMsg){promoMsg.textContent='Invalid promo code';promoMsg.style.display='block';promoMsg.style.color='#d62828';}}renderCart();});}
+
+// ===== INDIAN STATES =====
+const INDIAN_STATES = [
+  'Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chhattisgarh','Delhi','Goa','Gujarat','Haryana',
+  'Himachal Pradesh','Jharkhand','Karnataka','Kerala','Madhya Pradesh','Maharashtra','Manipur','Meghalaya',
+  'Mizoram','Nagaland','Odisha','Punjab','Rajasthan','Sikkim','Tamil Nadu','Telangana','Tripura',
+  'Uttar Pradesh','Uttarakhand','West Bengal'
+];
 
 // ===== CHECKOUT (multi-step: Address → Confirmation → Tracking) =====
 if (checkoutBtn) {
@@ -71,55 +79,52 @@ if (checkoutBtn) {
     const cart = getCart();
     if (cart.length === 0) { showToast('Your basket is empty!', 'error'); return; }
 
-    // Step 1: Address Form
+    // Step 1: Indian Address Form
     const overlay = document.createElement('div');
     overlay.className = 'modal-overlay active';
     overlay.id = 'checkout-overlay';
     overlay.innerHTML = `
-      <div class="modal-content" style="max-width:500px;">
+      <div class="modal-content" style="max-width:520px;">
         <button class="modal-close" id="close-checkout-modal">&times;</button>
         <div id="checkout-step-1">
-          <h2 style="margin-bottom:.25rem;">Shipping Address</h2>
-          <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:1.5rem;">Where should we send your handcrafted goods?</p>
+          <h2 style="margin-bottom:.25rem;">📦 Shipping Address</h2>
+          <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:1.5rem;">Where should we deliver your handcrafted goods?</p>
           <form id="address-form">
             <div class="auth-form-group">
               <label for="addr-name">Full Name</label>
-              <input type="text" id="addr-name" placeholder="Jane Doe" required>
-            </div>
-            <div class="auth-form-group">
-              <label for="addr-line1">Address Line 1</label>
-              <input type="text" id="addr-line1" placeholder="123 Artisan Lane" required>
-            </div>
-            <div class="auth-form-group">
-              <label for="addr-line2">Address Line 2 (Optional)</label>
-              <input type="text" id="addr-line2" placeholder="Apt 4B">
-            </div>
-            <div style="display:grid;grid-template-columns:2fr 1fr;gap:1rem;">
-              <div class="auth-form-group">
-                <label for="addr-city">City</label>
-                <input type="text" id="addr-city" placeholder="Portland" required>
-              </div>
-              <div class="auth-form-group">
-                <label for="addr-zip">ZIP Code</label>
-                <input type="text" id="addr-zip" placeholder="97201" required>
-              </div>
-            </div>
-            <div class="auth-form-group">
-              <label for="addr-country">Country</label>
-              <select id="addr-country" style="width:100%;padding:.75rem 1rem;border-radius:var(--radius-sm);border:1px solid rgba(107,112,92,0.2);font-family:var(--sans);font-size:.95rem;outline:none;background:var(--white);">
-                <option>United States</option>
-                <option>Canada</option>
-                <option>United Kingdom</option>
-                <option>Australia</option>
-                <option>India</option>
-                <option>Germany</option>
-                <option>France</option>
-                <option>Other</option>
-              </select>
+              <input type="text" id="addr-name" placeholder="e.g. Priya Sharma" required>
             </div>
             <div class="auth-form-group">
               <label for="addr-phone">Phone Number</label>
-              <input type="tel" id="addr-phone" placeholder="+1 (555) 123-4567" required>
+              <div style="display:flex;gap:.5rem;">
+                <span style="background:var(--primary-light);padding:.75rem .85rem;border-radius:var(--radius-sm);font-weight:600;color:var(--primary);white-space:nowrap;font-size:.95rem;">🇮🇳 +91</span>
+                <input type="tel" id="addr-phone" placeholder="98765 43210" pattern="[0-9]{10}" maxlength="10" required style="flex:1;">
+              </div>
+            </div>
+            <div class="auth-form-group">
+              <label for="addr-line1">Address Line 1</label>
+              <input type="text" id="addr-line1" placeholder="e.g. Flat 302, Surya Apartments" required>
+            </div>
+            <div class="auth-form-group">
+              <label for="addr-line2">Address Line 2 / Landmark</label>
+              <input type="text" id="addr-line2" placeholder="e.g. Near City Mall, MG Road">
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+              <div class="auth-form-group">
+                <label for="addr-city">City</label>
+                <input type="text" id="addr-city" placeholder="e.g. Jaipur" required>
+              </div>
+              <div class="auth-form-group">
+                <label for="addr-pin">PIN Code</label>
+                <input type="text" id="addr-pin" placeholder="e.g. 302001" pattern="[0-9]{6}" maxlength="6" required>
+              </div>
+            </div>
+            <div class="auth-form-group">
+              <label for="addr-state">State</label>
+              <select id="addr-state" style="width:100%;padding:.75rem 1rem;border-radius:var(--radius-sm);border:1px solid rgba(107,112,92,0.2);font-family:var(--sans);font-size:.95rem;outline:none;background:var(--white);" required>
+                <option value="">Select State</option>
+                ${INDIAN_STATES.map(s => `<option>${s}</option>`).join('')}
+              </select>
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%;margin-top:.5rem;">Continue to Payment 🔒</button>
           </form>
@@ -128,10 +133,10 @@ if (checkoutBtn) {
         <div id="checkout-step-2" style="display:none;text-align:center;">
           <div style="font-size:3rem;margin-bottom:1rem;">🎉</div>
           <h2 style="margin-bottom:.75rem;">Order Confirmed!</h2>
-          <p style="color:var(--text-muted);margin-bottom:.5rem;">Thank you for supporting independent artisans!</p>
+          <p style="color:var(--text-muted);margin-bottom:.5rem;">Dhanyavaad! Thank you for supporting Indian artisans! 🙏</p>
           <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:1rem;">(Demo – no real payment processed)</p>
           <div style="background:var(--primary-light);border-radius:var(--radius-sm);padding:1rem;margin-bottom:1.5rem;text-align:left;">
-            <p style="font-weight:600;margin-bottom:.5rem;">Shipping to:</p>
+            <p style="font-weight:600;margin-bottom:.5rem;">Delivering to:</p>
             <p id="confirm-address" style="color:var(--text-muted);font-size:.9rem;line-height:1.6;"></p>
           </div>
           <p style="font-weight:600;margin-bottom:.5rem;">Order ID: <span id="order-id" style="color:var(--primary);"></span></p>
@@ -151,19 +156,19 @@ if (checkoutBtn) {
             </div>
             <div class="tracking-step completed">
               <div class="tracking-dot"></div>
-              <div><strong>Artisan Notified</strong><p>The maker is preparing your item</p></div>
+              <div><strong>Artisan Notified</strong><p>The karigar is preparing your item</p></div>
             </div>
             <div class="tracking-step active">
               <div class="tracking-dot"></div>
-              <div><strong>Being Crafted</strong><p>Your handmade item is being created with care</p></div>
+              <div><strong>Being Crafted</strong><p>Your handmade item is being created with care ✨</p></div>
             </div>
             <div class="tracking-step">
               <div class="tracking-dot"></div>
-              <div><strong>Shipped</strong><p>On its way to you</p></div>
+              <div><strong>Shipped via India Post / Delhivery</strong><p>On its way to your doorstep</p></div>
             </div>
             <div class="tracking-step">
               <div class="tracking-dot"></div>
-              <div><strong>Delivered</strong><p>Enjoy your handcrafted treasure!</p></div>
+              <div><strong>Delivered</strong><p>Enjoy your handcrafted treasure! 🪔</p></div>
             </div>
           </div>
           <button class="btn btn-primary" id="btn-done-tracking" style="width:100%;margin-top:1.5rem;">Done</button>
@@ -183,13 +188,14 @@ if (checkoutBtn) {
     document.getElementById('address-form').addEventListener('submit', (e) => {
       e.preventDefault();
       const name = document.getElementById('addr-name').value;
+      const phone = document.getElementById('addr-phone').value;
       const line1 = document.getElementById('addr-line1').value;
       const line2 = document.getElementById('addr-line2').value;
       const city = document.getElementById('addr-city').value;
-      const zip = document.getElementById('addr-zip').value;
-      const country = document.getElementById('addr-country').value;
+      const pin = document.getElementById('addr-pin').value;
+      const state = document.getElementById('addr-state').value;
 
-      document.getElementById('confirm-address').innerHTML = `${name}<br>${line1}${line2 ? ', ' + line2 : ''}<br>${city}, ${zip}<br>${country}`;
+      document.getElementById('confirm-address').innerHTML = `${name}<br>+91 ${phone}<br>${line1}${line2 ? ', ' + line2 : ''}<br>${city}, ${state} – ${pin}<br>🇮🇳 India`;
       document.getElementById('order-id').textContent = orderId;
       document.getElementById('track-order-id').textContent = orderId;
 
@@ -198,7 +204,7 @@ if (checkoutBtn) {
 
       // Save order to localStorage
       const orders = JSON.parse(localStorage.getItem('crafthub_orders') || '[]');
-      orders.push({ id: orderId, items: cart, address: { name, line1, line2, city, zip, country }, date: new Date().toISOString(), status: 'Being Crafted' });
+      orders.push({ id: orderId, items: cart, address: { name, phone: '+91 ' + phone, line1, line2, city, pin, state, country: 'India' }, date: new Date().toISOString(), status: 'Being Crafted' });
       localStorage.setItem('crafthub_orders', JSON.stringify(orders));
 
       localStorage.removeItem('crafthub_cart');
