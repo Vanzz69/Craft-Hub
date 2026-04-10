@@ -267,6 +267,7 @@ img { max-width:100%; display:block; }
   .newsletter-form { flex-direction:column; }
   .hero-actions { flex-direction:column; align-items:center; }
   .seller-stats { gap:1.5rem; }
+  .dashboard-stats { grid-template-columns:repeat(2,1fr); }
 }
 @media(max-width:480px) {
   .hero-title { font-size:2rem; }
@@ -274,4 +275,26 @@ img { max-width:100%; display:block; }
   .category-grid { grid-template-columns:1fr; }
   .footer-content { grid-template-columns:1fr; }
   .role-selector { grid-template-columns:1fr; }
+  .dashboard-stats { grid-template-columns:1fr; }
 }
+
+/* ===== DASHBOARD STATS ===== */
+.dashboard-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:1.25rem; }
+.dash-stat-card { background:var(--white); border-radius:var(--radius-md); padding:1.25rem 1.5rem; box-shadow:var(--shadow-sm); display:flex; align-items:center; gap:1rem; transition:all .3s ease; }
+.dash-stat-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-md); }
+.dash-stat-icon { font-size:1.75rem; }
+.dash-stat-card strong { display:block; font-size:1.5rem; color:var(--primary); }
+.dash-stat-card span { font-size:.85rem; color:var(--text-muted); }
+
+/* ===== ORDER TRACKING TIMELINE ===== */
+.tracking-timeline { position:relative; padding-left:2rem; }
+.tracking-step { position:relative; padding-left:1.5rem; padding-bottom:1.75rem; border-left:2px solid rgba(107,112,92,0.2); }
+.tracking-step:last-child { border-left:2px solid transparent; padding-bottom:0; }
+.tracking-dot { width:14px; height:14px; border-radius:50%; background:rgba(107,112,92,0.2); position:absolute; left:-8px; top:2px; border:2px solid var(--white); transition:all .3s ease; }
+.tracking-step.completed .tracking-dot { background:var(--primary); }
+.tracking-step.active .tracking-dot { background:var(--primary); box-shadow:0 0 0 4px rgba(200,90,50,0.2); animation:pulse-dot 2s infinite; }
+.tracking-step strong { display:block; font-size:.95rem; margin-bottom:.15rem; }
+.tracking-step p { font-size:.85rem; color:var(--text-muted); margin:0; }
+.tracking-step.completed strong { color:var(--primary); }
+.tracking-step:not(.completed):not(.active) { opacity:.5; }
+@keyframes pulse-dot { 0%,100% { box-shadow:0 0 0 4px rgba(200,90,50,0.2); } 50% { box-shadow:0 0 0 8px rgba(200,90,50,0.1); } }

@@ -9,6 +9,7 @@ export default defineConfig({
         products: './pages/products.html',
         seller: './pages/seller.html',
         cart: './pages/cart.html',
+        dashboard: './pages/dashboard.html',
       }
     }
   }
