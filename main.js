@@ -1,4 +1,4 @@
-// main.js - Craft-Hub Core Entry Point
+// main.js - Craft-Nest Core Entry Point
 import './style.css';
 import './js/auth.js';
 
@@ -256,7 +256,7 @@ const newsletterForm = document.querySelector('.newsletter-form');
 if (newsletterForm) {
   newsletterForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    showToast('Subscribed! Welcome to the Craft-Hub family 🌿', 'success');
+    showToast('Subscribed! Welcome to the Craft-Nest family 🌿', 'success');
     newsletterForm.reset();
   });
 }

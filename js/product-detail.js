@@ -182,7 +182,7 @@ function renderProductDetail() {
   }
 
   // Update page title
-  document.title = `${product.title} | Craft-Hub`;
+  document.title = `${product.title} | Craft-Nest`;
 
   // Related products
   const related = ALL_PRODUCTS.filter(p => p.category === product.category && p.id !== product.id).slice(0, 3);
